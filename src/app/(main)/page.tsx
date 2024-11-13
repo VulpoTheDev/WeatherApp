@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { ForecastData, ForecastEntry, Location, WeatherData } from "../typings";
-import { celsiusToFahrenheit, fetchLocationSuggestions, fetchCurrentWeather, fetchWeatherForecast, getWeatherIcon, getActivities, groupForecastByDate } from "../utils";
-import WeatherForecast, { DailyForecast } from "../components/WeatherForcast";
+import { ForecastData, Location, WeatherData } from "../typings";
+import { celsiusToFahrenheit, fetchLocationSuggestions, fetchCurrentWeather, fetchWeatherForecast, getWeatherIcon, getActivities } from "../utils";
+import { DailyForecast } from "../components/WeatherForcast";
 import LocationSuggestion from "../components/LocationSuggestion";
 
 export default function Home() {
