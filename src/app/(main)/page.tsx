@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { ForecastData, ForecastEntry, Location, WeatherData } from "../typings";
-import { celsiusToFahrenheit, fetchLocationSuggestions, fetchCurrentWeather, fetchWeatherForecast, getWeatherIcon, getActivities } from "../utils";
-import WeatherForecast from "../components/WeatherForcast";
+import { celsiusToFahrenheit, fetchLocationSuggestions, fetchCurrentWeather, fetchWeatherForecast, getWeatherIcon, getActivities, groupForecastByDate } from "../utils";
+import WeatherForecast, { DailyForecast } from "../components/WeatherForcast";
 import LocationSuggestion from "../components/LocationSuggestion";
 
 export default function Home() {
@@ -105,16 +105,7 @@ export default function Home() {
           </section>
         )}
 
-        {forecast && forecast.list && (
-          <section className="mt-12">
-            <h2 className="text-3xl font-bold mb-6 text-center">5-Day Forecast</h2>
-            <div className="flex space-x-4 overflow-x-auto py-4">
-              {forecast.list.slice(0, 40).map((entry: ForecastEntry, index: number) => (
-                <WeatherForecast entry={entry} key={index} />
-              ))}
-            </div>
-          </section>
-        )}
+        <DailyForecast forecast={forecast} />
 
         {error && (
           <p className="text-center text-red-400 mt-6">{error}</p>

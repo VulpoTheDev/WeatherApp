@@ -1,4 +1,5 @@
 import { LuBike, LuBook, LuCloud, LuCoffee, LuDroplets, LuSun, LuUmbrella, LuWind } from "react-icons/lu"
+import { ForecastEntry } from "./typings"
 
 export const fetchLocationSuggestions = async (query: string) => {
     const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY
@@ -91,3 +92,15 @@ export const getActivities = (weather: string) => {
 
     return activitiesMap[weather] || [{ icon: <LuSun className="h-6 w-6" />, text: "Have a great day!" }];
 };
+
+
+export function groupForecastByDate(forecastList: ForecastEntry[]) {
+    const grouped: { [date: string]: ForecastEntry } = {};
+    forecastList.forEach((entry) => {
+      const date = new Date(entry.dt * 1000).toLocaleDateString();
+      if (!grouped[date]) {
+        grouped[date] = entry;
+      }
+    });
+    return Object.values(grouped);
+  }
