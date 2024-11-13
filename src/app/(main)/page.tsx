@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Location, WeatherData } from "../typings";
+import { ForecastData, ForecastEntry, Location, WeatherData } from "../typings";
 import { celsiusToFahrenheit, fetchLocationSuggestions, fetchCurrentWeather, fetchWeatherForecast, getWeatherIcon, getActivities } from "../utils";
 import WeatherForecast from "../components/WeatherForcast";
 import LocationSuggestion from "../components/LocationSuggestion";
@@ -10,7 +10,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [locationSuggestions, setLocationSuggestions] = useState<Location[]>([]);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
-  const [forecast, setForecast] = useState<any | null>(null);
+  const [forecast, setForecast] = useState<ForecastData | null>(null);
   const [error, setError] = useState("");
 
   const handleSelectLocation = async (location: Location) => {
@@ -28,7 +28,7 @@ export default function Home() {
         throw new Error("Weather data not available.");
       }
     } catch (err) {
-      setError("Unable to fetch weather data.");
+      setError(`Unable to fetch weather data. ${err}`);
       setWeatherData(null);
       setForecast(null);
     }
@@ -109,7 +109,7 @@ export default function Home() {
           <section className="mt-12">
             <h2 className="text-3xl font-bold mb-6 text-center">5-Day Forecast</h2>
             <div className="flex space-x-4 overflow-x-auto py-4">
-              {forecast.list.slice(0, 40).map((entry: any, index: number) => (
+              {forecast.list.slice(0, 40).map((entry: ForecastEntry, index: number) => (
                 <WeatherForecast entry={entry} key={index} />
               ))}
             </div>
