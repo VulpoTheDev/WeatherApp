@@ -2,7 +2,7 @@ import { LuBike, LuBook, LuCloud, LuCoffee, LuDroplets, LuSun, LuUmbrella, LuWin
 
 export const fetchLocationSuggestions = async (query: string) => {
     const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY
-    const GEO_ENDPOINT = `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
+    const GEO_ENDPOINT = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
     try {
         const response = await fetch(GEO_ENDPOINT)
         if (!response.ok) {
